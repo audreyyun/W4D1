@@ -12,9 +12,15 @@ class KnightPathFinder
     end
 
     def self.valid_moves(pos) #would give all 8 possible positions, regardless 
-        #pass in position, give all 8 moves
-        # visited.push(pos)
+        possible_positions = [[1, 2],[1, -2],[2, 1],[2, -1],[-1, -2],[-1, 2],[-2, -1],[-2, 1]]
+        
+        all_moves = possible_positions.map do |position|
+            [pos[0] + position[0], pos[1] + position[1]]
+        end
 
+        all_moves.select do |position|
+            (position[0] <= 7 && position[0] >= 0) && (position[1] <= 7 && position[1] >= 0)
+        end
         
     end
 
@@ -38,10 +44,15 @@ class KnightPathFinder
     end
 
     def new_move_positions(pos)
-        if !@considered_positions.include?(self.class.valid_moves(pos)) #will need to be rewritten to iterate through all valid moves 
-            @considered_positions << pos
+        new_arr = []
+        self.class.valid_moves(pos).each do |position|
+            if !@considered_positions.include?(position)
+                new_arr << position
+            end
         end
-        return @considered_positions
+
+        @considered_positions += new_arr
+        new_arr
     end
 
     # def find_path(end_pos)
