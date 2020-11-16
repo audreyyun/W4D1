@@ -60,11 +60,19 @@ class KnightPathFinder
     end
 
     def find_path(end_pos)
-        self.dfs(end_pos)
+        trace = trace_path_back(@root.dfs(end_pos)) # takes in the bottom treenode
+        trace.reverse
     end
 
-    def method_name
-        
+    def trace_path_back(last_node)
+        return [last_node.value] if last_node.parent.nil?
+
+        parents = []
+
+        parents << last_node.value
+        next_node = trace_path_back(last_node.parent)
+
+        parents + next_node
     end
 
 
