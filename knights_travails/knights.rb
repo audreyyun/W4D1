@@ -6,7 +6,7 @@ class KnightPathFinder
     #move with confines of the board
     #can add/subtract a one/two or two/one per [row][col], and vise verse
     #we start at [0, 0] which is the root node
-
+    attr_reader :root
     def self.root_node(start_pos)
         PolyTreeNode.new(start_pos)
     end
@@ -60,9 +60,12 @@ class KnightPathFinder
     end
 
     def find_path(end_pos)
-        #
-
-
+        self.dfs(end_pos)
     end
+
+    def method_name
+        
+    end
+
 
 end
